@@ -51,3 +51,4 @@ Project Setup
 ```
 Please run migrations after checkout/clone.
 Then point domain to backend/web.
+Also set required permission for runtime folder.
