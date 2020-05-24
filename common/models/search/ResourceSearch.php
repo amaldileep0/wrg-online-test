@@ -72,7 +72,16 @@ class ResourceSearch extends Resource
             ]);
         }
 
-           $query->andFilterWhere(['like', 'file_path', $this->search_term]);
+        //workaround
+        if (strpos($this->search_term, ".") !== false) {
+            $output = substr( $this->search_term, 0, strrpos( $this->search_term, '.' ) );
+            if($output !== "*" ) {
+                $query->andFilterWhere(['like', 'file_path', $output]); 
+            }
+        } else {
+            $query->andFilterWhere(['like', 'file_path', $this->search_term]);
+        }
+
         }
         return $dataProvider;
     }
