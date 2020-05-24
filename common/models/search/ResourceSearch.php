@@ -64,6 +64,14 @@ class ResourceSearch extends Resource
 
       
         if($this->search_term) {
+
+        $ext = pathinfo($this->search_term, PATHINFO_EXTENSION);
+        if($ext) {
+            $query->andFilterWhere([
+                'file_type' => $ext
+            ]);
+        }
+
            $query->andFilterWhere(['like', 'file_path', $this->search_term]);
         }
         return $dataProvider;
